@@ -34,7 +34,7 @@ class User {
 
             // Create users table if it doesn't exist
             sql::Statement *stmt = con->createStatement();
-            stmt->execute("CREATE TABLE IF NOT EXISTS Users (userID INT(0) PRIMARY KEY, Name VARCHAR(100), Email VARCHAR(100), Password VARCHAR(100), Username VARCHAR(100), UserType VARCHAR(100), PhoneNumber INT(0))");
+            stmt->execute("CREATE TABLE IF NOT EXISTS Users (userID INT(0) PRIMARY KEY, Name VARCHAR(100), Email VARCHAR(100), Password VARCHAR(100), PhoneNumber VARCHAR(100)");
             delete stmt;
 
         }
