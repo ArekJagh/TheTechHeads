@@ -29,7 +29,7 @@ class User {
         static void initializeDatabase(const std::string &endpoint, const std::string &username, const std::string &password, const std::string &dbName){
             // initialize MySQL driver
             driver = sql::mysql::get_mysql_driver_instance();
-            con = driver->connect("tcp://database-1.cvkssckyc4iw.us-east-2.rds.amazonaws.com:3306", "admin", "3vpRm!I}p-a~![uRa<SNr(~PXoCI");
+        
             con->setSchema("database-1");
 
             // Create users table if it doesn't exist
