@@ -1,6 +1,7 @@
 #ifndef SHOPPING_CART_H
 #define SHOPPING_CART_H
 
+#include "database.h"
 #include <string>
 #include <vector>
 
