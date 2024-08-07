@@ -1,7 +1,7 @@
 #ifndef USER_H
 #define USER_H
 
-
+#include "uuid_generator.h"
 #include "database.h"
 #include <string>
 

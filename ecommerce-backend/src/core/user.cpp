@@ -1,16 +1,12 @@
 #include "user.h"
-#include <cppconn/prepared_statement.h>
 #include <openssl/sha.h>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
-#include <boost/uuid/uuid_io.hpp>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
 
 // constructor to initialize a user object with username, password, and email
 User::User(const std::string& username, const std::string& password, const std::string& email)
-    : userId(generateUUID()), username(username), password(hashPassword(password)), email(email) {}
+    : userId(UUIDGenerator.generate()), username(username), password(hashPassword(password)), email(email) {}
 
 // save user to database
 bool User::saveToDatabase(Database& db) {
@@ -38,12 +34,6 @@ bool User::authenticate(const std::string& password) {
         ss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(hash[i]);
     }
     return ss.str() == this -> password; // compare the hashed password with the stored password
-}
-
-// generate a unique user id
-std::string User::generateUUID() {
-    boost::uuids::uuid uuid = boost::uuids::random_generator()(); // generate a random uuid
-    return to_string(uuid); // convert the uuid to a string
 }
 
 std::string User::hashPassword(const std::string& password){
