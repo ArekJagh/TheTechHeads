@@ -1,0 +1,36 @@
+package com.example.demo10;
+
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+
+
+
+
+public class AppNavigation {
+
+    private Stage stage;
+    private Cart cart;
+
+    public AppNavigation(Stage stage) {
+        this.stage = stage;
+        this.cart = new Cart();
+    }
+
+    public void goToProductListing() {
+        ProductListingController productListingController = new ProductListingController(cart, this);
+        stage.setScene(new Scene(productListingController.getView(), 800, 600));
+    }
+
+    public void goToShoppingCart() {
+        CartViewController cartViewController = new CartViewController(cart, this);
+        stage.setScene(new Scene(cartViewController.getView(), 800, 600));
+    }
+
+    public void goToCheckout() {
+        CheckoutViewController checkoutViewController = new CheckoutViewController(cart);
+        stage.setScene(new Scene(checkoutViewController.getView(), 800, 600));
+    }
+
+
+}
