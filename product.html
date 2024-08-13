@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike Shoe Product Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">TheTechShoes</div>
+        <div class="burger-menu" id="burger-menu">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="nav-links" id="nav-links">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Men</a></li>
+                <li><a href="#">Women</a></li>
+                <li><a href="#">Kids</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#" id="checkout-btn">Checkout (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="product-grid">
+            <div class="product" data-category="men">
+                <img src="Flyknitnew.png" alt="Men's Nike Air VaporMax Flyknit 3">
+                <h2>Nike VaporMax Flyknit 3</h2>
+                <p class="price">$190.00</p>
+                <p class="description">Revolutionary new Air technology in Nike Air VaporMax Flyknit 3. The shoe delivers an ultra-lightweight.</p>
+                <button type="button" class="btn">Add to Cart</button>
+            </div>                        
+            <div class="product" data-category="women">
+                <img src="Airmax 270.png" alt="Women's Nike Air Max 270">
+                <h2>Nike Air Max 270</h2>
+                <p class="price">$150.00</p>
+                <p class="description">Nike Air Max 270 features the first-ever Max Air unit created specifically for Nike Sportswear.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="product" data-category="men">
+                <img src="AirFroce.png" alt="Men's Nike Air Force 1 '07">
+                <h2>Nike Air Force 1 '07</h2>
+                <p class="price">$100.00</p>
+                <p class="description">The legend lives on in the Nike Air Force 1 '07, a modern take on the iconic AF1.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="product" data-category="women">
+                <img src="react.png" alt="Women's Nike React Infinity Run">
+                <h2>Nike React Infinity Run</h2>
+                <p class="price">$160.00</p>
+                <p class="description">Nike React Infinity Run provides a soft, stable ride with its lightweight, durable foam.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="product" data-category="men">
+                <img src="Vaporfly.png" alt="Men's Nike ZoomX Vaporfly NEXT%">
+                <h2>Nike ZoomX Vaporfly NEXT%</h2>
+                <p class="price">$250.00</p>
+                <p class="description">Engineered for speed, Nike ZoomX Vaporfly NEXT% features advanced lightweight materials.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="product" data-category="kids">
+                <img src="Blazer.png" alt="Kids Nike Blazer Mid '77">
+                <h2>Nike Blazer Mid '77</h2>
+                <p class="price">$120.00</p>
+                <p class="description">The Nike Blazer Mid '77 Vintage combines old-school basketball style with a vintage finish.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            
+            <div class="product" data-category="women">
+                <img src="Airmax 90.png" alt="Women's Nike Air Max 90">
+                <h2>Nike Air Max 90</h2>
+                <p class="price">$130.00</p>
+                <p class="description">The Nike Air Max 90 stays true to its roots with the iconic Waffle sole, stitched overlays, and classic TPU accents.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="product" data-category="men">
+                <img src="Pegasus.jpg" alt="Men's Nike Air Zoom Pegasus 37">
+                <h2>Nike Air Zoom Pegasus 37</h2>
+                <p class="price">$120.00</p>
+                <p class="description">Nike's most trusted shoe gets faster with the Nike Air Zoom Pegasus 37, featuring the React foam and a forefoot Air unit.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="product" data-category="women">
+                <img src="Panda.png" alt="Women's Nike Pandas">
+                <h2>Nike Pandas</h2>
+                <p class="price">$170.00</p>
+                <p class="description">A classic that never goes out of style, combines premium leather and a timeless design.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="product" data-category="kids">
+                <img src="metcon6.png" alt="Kids Nike Metcon 6">
+                <h2>Nike Metcon 6</h2>
+                <p class="price">$130.00</p>
+                <p class="description">The most breathable version yet, Nike Metcon 6 helps you keep your cool when you're maxing out.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="product" data-category="men">
+                <img src="freerun.jpg" alt="Men's Nike Free RN 5.0">
+                <h2>Nike Free RN 5.0</h2>
+                <p class="price">$100.00</p>
+                <p class="description">Nike Free RN 5.0 features less foam in the midsole for a more natural feel.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="product" data-category="women">
+                <img src="zoomfly5.png" alt="Women's Nike Zoom Fly 3">
+                <h2>Nike Zoom Fly 3</h2>
+                <p class="price">$160.00</p>
+                <p class="description">The Nike Zoom Fly 3 offers a powerful feel underfoot for long-distance runs.</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+        </div>        
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 TheTechShoes, Inc. All Rights Reserved</p>
+    </footer>
+
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h1>Contact Us</h1>
+            <p>For inquiries or support, please reach out to us:</p>
+            <p>Email Arek: <a href="arek.jaghlasian.736@my.csun.edu">arek.jaghlasian.736@my.csun.edu</a></p>
+            <p>Email John: <a href="john.dong.177@my.csun.edu">john.dong.177@my.csun.edu</a></p>
+            <p>Email Cristian: <a href="Cristian.diaz.910@my.csun.edu">Cristian.diaz.910@my.csun.edu</a></p>
+            <p>Email Shadi: <a href="Shadi.zgheib.050@my.csun.edu">Shadi.zgheib.050@my.csun.edu</a></p>
+            <p>Phone: (818)-282-0311</p>
+            <p>Address: 123 TheTechHeads Street, Sneaker City, SC 12345</p>
+        </div>
+    </div>
+    
+    <script>
+        
+        var modal = document.getElementById('contact-modal');
+        
+        
+        var contactBtn = document.getElementById('contact-btn');
+        
+        
+        var closeBtn = document.getElementsByClassName('close-btn')[0];
+        
+        
+        contactBtn.onclick = function() {
+            modal.style.display = 'block';
+        }
+        
+        
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+        
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+    <script src="product.js"></script>
+</body>
+</html>
