@@ -62,7 +62,7 @@ public class CheckoutViewController {
     }
 
     private void handlePayment(String cardNumber, String expDate, String cvv) {
-        // You can add payment processing logic here
+        // add payment processing logic here
 
         // Show the success message
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
