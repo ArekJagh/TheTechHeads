@@ -1,0 +1,92 @@
+package com.example.demo10;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
+
+
+public class MainPageController {
+
+    private Cart cart;
+    private AppNavigation appNavigation;
+
+    public MainPageController(Cart cart, AppNavigation appNavigation) {
+        this.cart = cart;
+        this.appNavigation = appNavigation;
+    }
+
+    public BorderPane getView() {
+        BorderPane borderPane = new BorderPane();
+
+        // Create MenuBar
+        MenuBar menuBar = new MenuBar();
+
+        // Create Menus
+        Menu accountMenu = new Menu("Account");
+        MenuItem loginItem = new MenuItem("Login");
+        MenuItem registerItem = new MenuItem("Register");
+        accountMenu.getItems().addAll(loginItem, registerItem);
+
+        Menu cartMenu = new Menu("Cart");
+        MenuItem viewCartItem = new MenuItem("View Cart");
+        cartMenu.getItems().add(viewCartItem);
+
+        menuBar.getMenus().addAll(accountMenu, cartMenu);
+
+        // Add MenuBar to the top of the BorderPane
+        borderPane.setTop(menuBar);
+
+        // Create Product Listing
+        VBox productListView = createProductListView();
+        borderPane.setCenter(productListView);
+
+        // Set MenuItem Actions
+        loginItem.setOnAction(event -> appNavigation.goToLoginScreen());
+        registerItem.setOnAction(event -> appNavigation.goToRegisterScreen());
+        viewCartItem.setOnAction(event -> appNavigation.goToShoppingCart());
+
+        return borderPane;
+    }
+
+    private VBox createProductListView() {
+        VBox vbox = new VBox();
+        vbox.setSpacing(10);
+
+        for (int i = 0; i < 10; i++) {
+            Product product = new Product("Product " + (i + 1), (i + 1) * 10.0);
+
+            HBox productBox = new HBox();
+            productBox.setSpacing(10);
+
+            Label productName = new Label(product.getName());
+            Label productPrice = new Label("$" + product.getPrice());
+
+            Button viewDetailsButton = new Button("View Details");
+            Button addToCartButton = new Button("Add to Cart");
+
+            viewDetailsButton.setOnAction(event -> viewProductDetails(product));
+            addToCartButton.setOnAction(event -> addToCart(product));
+
+            productBox.getChildren().addAll(productName, productPrice, viewDetailsButton, addToCartButton);
+            vbox.getChildren().add(productBox);
+        }
+
+        return vbox;
+    }
+
+    private void viewProductDetails(Product product) {
+        ProductDetailsController productDetailsController = new ProductDetailsController(product, appNavigation);
+        appNavigation.getStage().setScene(new Scene(productDetailsController.getView(), 800, 600));
+    }
+
+    private void addToCart(Product product) {
+        cart.addProduct(product);
+        System.out.println(product.getName() + " added to cart.");
+    }
+}
+
