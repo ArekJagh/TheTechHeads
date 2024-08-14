@@ -4,13 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 public class EcommerceApp extends Application {
 
@@ -20,10 +14,9 @@ public class EcommerceApp extends Application {
 
         AppNavigation appNavigation = new AppNavigation(primaryStage);
 
-        // Start with login screen
-        Scene scene = new Scene(new LoginScreen(appNavigation).getView(), 800, 600);
+        // Start with main page
+        appNavigation.goToMainPage();
 
-        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
