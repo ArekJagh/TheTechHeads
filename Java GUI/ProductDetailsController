@@ -1,0 +1,30 @@
+package com.example.demo10;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+
+public class ProductDetailsController {
+
+    private Product product;
+    private AppNavigation appNavigation;
+
+    public ProductDetailsController(Product product, AppNavigation appNavigation) {
+        this.product = product;
+        this.appNavigation = appNavigation;
+    }
+
+    public VBox getView() {
+        VBox vbox = new VBox();
+        vbox.setSpacing(10);
+
+        Label nameLabel = new Label("Name: " + product.getName());
+        Label priceLabel = new Label("Price: $" + product.getPrice());
+
+        Button backButton = new Button("Back");
+        backButton.setOnAction(event -> appNavigation.goToMainPage());
+
+        vbox.getChildren().addAll(nameLabel, priceLabel, backButton);
+        return vbox;
+    }
+}
