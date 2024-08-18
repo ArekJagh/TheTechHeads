@@ -15,7 +15,7 @@ public class ProductDAOImpl extends GenericDAOImpl<Product, String> implements P
     }
 
     @Override
-    public findByName(String name) {
+    public Product findByName(String name) {
         String sql = "SELECT * FROM products WHERE product_name = ?";
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -159,9 +159,9 @@ public class ProductDAOImpl extends GenericDAOImpl<Product, String> implements P
         product.setProductId(rs.getString("id"));
         product.setName(rs.getString("product_name"));
         product.setDescription(rs.getString("product_description"));
-        product.setPrice(rs.getString("price"));
+        product.setPrice(rs.getDouble("price"));
 
-        product.setQuantity(rs.getString("quantity"));
+        product.setQuantity(rs.getInt("quantity"));
         product.setCategoryId(rs.getString("category_id"));
 
 

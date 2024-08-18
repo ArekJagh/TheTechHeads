@@ -16,6 +16,7 @@ public class Product {
         this.quantity = quantity;
         this.categoryId = categoryId;
     }
+    public Product() {}
 
     // Getter methods
     public String getProductId() {
