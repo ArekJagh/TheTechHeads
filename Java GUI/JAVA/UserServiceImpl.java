@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    // Example validation method
+    // validation method
     private void validateUser(User user) {
         // Validate username
         if (user.getUsername() == null || user.getUsername().isEmpty()) {

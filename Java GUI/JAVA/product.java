@@ -1,3 +1,5 @@
+import java.util.UUID;
+
 public class Product {
     private String productId;
     private String name;
@@ -13,10 +15,6 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
         this.categoryId = categoryId;
-    }
-
-    public boolean saveToDatabase(Database db) {
-        // Implementation to save product to database
     }
 
     // Getter methods
@@ -43,4 +41,30 @@ public class Product {
     public String getCategoryId() {
         return categoryId;
     }
+
+    // Setter methods
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
 }
