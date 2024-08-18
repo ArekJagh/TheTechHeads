@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
@@ -25,23 +24,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id) {
-        Optional<User> user = userDAO.findById(id);
-        user.ifPresent(userDAO::delete);
+    public void deleteUser(String id) {
+        User user = userDAO.findById(id);
+        if (user != null) {
+            userDAO.delete(user);
+        }
     }
 
     @Override
-    public Optional<User> findUserById(Long id) {
+    public User findUserById(String id) {
         return userDAO.findById(id);
     }
 
     @Override
-    public Optional<User> findUserByUsername(String username) {
+    public User findUserByUsername(String username) {
         return userDAO.findByUsername(username);
     }
 
     @Override
-    public Optional<User> findUserByEmail(String email) {
+    public User findUserByEmail(String email) {
         return userDAO.findByEmail(email);
     }
 
@@ -51,9 +52,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> authenticate(String username, String password) {
-        Optional<User> user = userDAO.findByUsername(username);
-        return user.filter(u -> u.getPassword().equals(password));
+    public User authenticate(String username, String password) {
+        User user = userDAO.findByUsername(username);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
     }
 
     // Example validation method
@@ -64,7 +68,7 @@ public class UserServiceImpl implements UserService {
         }
         
         // Check if username is unique (e.g., by querying the database)
-        if (userDAO.findByUsername(user.getUsername()).isPresent()) {
+        if (userDAO.findByUsername(user.getUsername()) != null) {
             throw new IllegalArgumentException("Username already exists");
         }
         
@@ -72,17 +76,18 @@ public class UserServiceImpl implements UserService {
         if (user.getPassword() == null || user.getPassword().length() < 8) {
             throw new IllegalArgumentException("Password must be at least 8 characters long");
         }
-        
+        /* 
         // Ensure password complexity (e.g., at least one special character)
         if (!user.getPassword().matches(".*[!@#$%^&*].*")) {
             throw new IllegalArgumentException("Password must contain at least one special character");
         }
-        
+            */
+        /* 
         // Validate email
         if (user.getEmail() == null || !user.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
             throw new IllegalArgumentException("Email is not valid");
         }
-        
+        */
         // Additional field validations
 
         // e.g., validate age, phone number, etc.

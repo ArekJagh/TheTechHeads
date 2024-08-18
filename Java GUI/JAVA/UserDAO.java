@@ -1,5 +1,8 @@
-public interface UserDAO extends GenericDAO<User, Long> {
-    Optional<User> findByUsername(String username);
-    Optional<User> findByEmail(String email);
+import java.util.List;
+
+
+public interface UserDAO extends GenericDAO<User, String> {
+    User findByUsername(String username);
+    User findByEmail(String email);
     List<User> findByLastName(String lastName);
 }

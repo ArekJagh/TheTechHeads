@@ -1,24 +1,23 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
- * A generic DAO implementation that provides basic CRUD operations for any entity.
+ * A generic DAO implementation that provides basic CRUD operations for any entity using JDBC.
  * 
  * @param <T>  The type of the entity.
  * @param <ID> The type of the entity's identifier.
  */
 public abstract class GenericDAOImpl<T, ID> implements GenericDAO<T, ID> {
 
-    // Class type of the entity. This is used by the EntityManager to know the type of entity it is working with.
+    // Class type of the entity. This is used to know the type of entity it is working with.
     private Class<T> persistentClass;
 
-    // The EntityManager is used to interact with the persistence context (usually a database).
-    @PersistenceContext
-    protected EntityManager entityManager;
-
     /**
-     * Constructor that initializes the generic DAO with the class type of the entity.
+     * Constructor that initializes the generic DAO with the class type of the entity and the database connection manager.
      * 
      * @param persistentClass The class type of the entity (e.g., Customer.class).
      */
@@ -33,7 +32,18 @@ public abstract class GenericDAOImpl<T, ID> implements GenericDAO<T, ID> {
      */
     @Override
     public void save(T entity) {
-        entityManager.persist(entity);  // The persist method makes the entity managed and persistent.
+        // Implement JDBC code to save the entity
+        // Example: INSERT INTO table_name (columns) VALUES (values)
+        try (Connection connection = Database.getConnection()) {
+            String sql = "INSERT INTO " + persistentClass.getSimpleName() + " (...) VALUES (...)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                // Set parameters for the statement
+                // statement.setXXX(1, entity.getXXX());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -44,8 +54,25 @@ public abstract class GenericDAOImpl<T, ID> implements GenericDAO<T, ID> {
      */
     @Override
     public T findById(ID id) {
-        // The find method retrieves an entity from the database by its primary key.
-        return entityManager.find(persistentClass, id);
+        // Implement JDBC code to find the entity by ID
+        // Example: SELECT * FROM table_name WHERE id = ?
+        T entity = null;
+        try (Connection connection = Database.getConnection()) {
+            String sql = "SELECT * FROM " + persistentClass.getSimpleName() + " WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                // Set parameters for the statement
+                // statement.setXXX(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        // Map result set to entity
+                        // entity = mapResultSetToEntity(resultSet);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entity;
     }
 
     /**
@@ -55,8 +82,23 @@ public abstract class GenericDAOImpl<T, ID> implements GenericDAO<T, ID> {
      */
     @Override
     public List<T> findAll() {
-        // Creates a JPQL query to select all entities of the given type.
-        return entityManager.createQuery("from " + persistentClass.getName(), persistentClass).getResultList();
+        List<T> entities = new ArrayList<>();
+        // Implement JDBC code to retrieve all entities
+        // Example: SELECT * FROM table_name
+        try (Connection connection = Database.getConnection()) {
+            String sql = "SELECT * FROM " + persistentClass.getSimpleName();
+            try (PreparedStatement statement = connection.prepareStatement(sql);
+                 ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Map result set to entity
+                    // T entity = mapResultSetToEntity(resultSet);
+                    // entities.add(entity);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entities;
     }
 
     /**
@@ -66,11 +108,46 @@ public abstract class GenericDAOImpl<T, ID> implements GenericDAO<T, ID> {
      */
     @Override
     public void update(T entity) {
-        // The merge method updates the entity in the database. It returns the managed entity instance.
-        entityManager.merge(entity);
+        // Implement JDBC code to update the entity
+        // Example: UPDATE table_name SET column1 = ?, column2 = ? WHERE id = ?
+        try (Connection connection = Database.getConnection()) {
+            String sql = "UPDATE " + persistentClass.getSimpleName() + " SET ... WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                // Set parameters for the statement
+                // statement.setXXX(1, entity.getXXX());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Deletes an entity from the database.
      * 
-     * @param entity​⬤
+     * @param entity The entity to be deleted.
+     */
+    @Override
+    public void delete(T entity) {
+        // Implement JDBC code to delete the entity
+        // Example: DELETE FROM table_name WHERE id = ?
+        try (Connection connection = Database.getConnection()) {
+            String sql = "DELETE FROM " + persistentClass.getSimpleName() + " WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                // Set parameters for the statement
+                // statement.setXXX(1, entity.getXXX());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    // Implement a method to map ResultSet to entity
+    // private T mapResultSetToEntity(ResultSet resultSet) {
+    //     // Map result set to entity
+    //     return null;
+    // }
+}

@@ -1,17 +1,8 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.UUID;
 
-@Entity
-@Table(name = "users")  // Maps to a table named 'users' in the database
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-generates the primary key
-    private Long id;
-
+    private String id;
     private String firstName;
     private String lastName;
     private String username;
@@ -21,9 +12,11 @@ public class User {
     // Constructors, getters, and setters
 
     public User() {
+        this.id = UUID.randomUUID().toString();  // Generate a random UUID for the ID
     }
 
     public User(String firstName, String lastName, String username, String password, String email) {
+        this.id = UUID.randomUUID().toString();  // Generate a random UUID for the ID
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -31,11 +24,11 @@ public class User {
         this.email = email;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -78,4 +71,5 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }
